@@ -13,7 +13,7 @@ console_scripts = [
 
 setup(
     name='private_utils',
-    version='0.0.0',
+    version='0.0.3',
     packages=packages,
     install_requires=install_requires,
 )

@@ -1,8 +1,8 @@
 from setuptools import setup
 
 install_requires = [
-     mysqlclient,
-     requests
+     'mysqlclient',
+     'requests'
 ]
 
 packages = [
@@ -15,7 +15,7 @@ console_scripts = [
 
 setup(
     name='privutils',
-    version='0.0.4',
+    version='0.0.5',
     packages=packages,
     install_requires=install_requires,
 )

@@ -19,7 +19,7 @@ console_scripts = [
 
 setup(
     name='privutils',
-    version='0.0.7',
+    version='0.0.8',
     packages=packages,
     install_requires=install_requires,
 )

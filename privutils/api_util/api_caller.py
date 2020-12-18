@@ -2,7 +2,7 @@
 
 import json
 import requests
-from utils.api_util.api_exception import *
+from privutils.api_util.api_exception import *
 
 class ApiCaller(object):
     endpoint = ''

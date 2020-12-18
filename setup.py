@@ -4,7 +4,7 @@ install_requires = [
 ]
 
 packages = [
-    'utils',
+    'private_utils',
 ]
 
 console_scripts = [

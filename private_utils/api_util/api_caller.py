@@ -42,20 +42,22 @@ class ApiCaller(object):
         return self.__extract_json(response)
 
     def post(self, path, params):
+        url = f"{self.endpoint}{path}"
         response = requests.post(
-            path,
+            url,
             headers = self.__get_header(),
             json = params,
         )
-        self.__check_status_code(path, response)
+        self.__check_status_code(url, response)
         return self.__extract_json(response)
 
     def delete(self, path, params):
+        url = f"{self.endpoint}{path}",
         response = requests.delete(
-            f"{self.endpoint}{path}",
+            url,
             headers = self.__get_header(),
             params = params,
         )
-        self.__check_status_code(path, response)
+        self.__check_status_code(url, response)
         return self.__extract_json(response)
 

@@ -49,7 +49,7 @@ class ApiCaller(object):
         return self.__extract_json(response)
 
     def put(self, path, headers={}, params={}):
-        url = f"{self.endpoint}{path}",
+        url = f"{self.endpoint}{path}"
         response = requests.put(
             url,
             headers = headers,
@@ -59,7 +59,7 @@ class ApiCaller(object):
         return self.__extract_json(response)
 
     def delete(self, path, headers={}, params={}):
-        url = f"{self.endpoint}{path}",
+        url = f"{self.endpoint}{path}"
         response = requests.delete(
             url,
             headers = headers,

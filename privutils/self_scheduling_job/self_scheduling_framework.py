@@ -6,8 +6,10 @@ import fcntl
 class SelfSchedulingFramework(metaclass=ABCMeta):
   task_storage = None
 
-  def __init__(self, task_storage):
+  def __init__(self, task_storage, success_handler, failure_handler):
     self.task_storage = task_storage
+    self.success_handler = success_handler
+    self.failure_handler = failure_handler
 
   def __exclusive_execution(self, f):
     name = os.path.basename(__file__)
@@ -27,10 +29,15 @@ class SelfSchedulingFramework(metaclass=ABCMeta):
 
   def finish_tasks(self):
     def f():
-      tc = datetime.now()
+      tc = datetime.datetime.now()
       lt = self.task_storage.put_out(tc)
       while lt:
-        map(self._do, lt)
+        for t in lt:
+          try:
+            self._do(t)
+            self.success_handler(t)
+          except Exception as e:
+            self.failure_handler(t, e)
         lt = self.task_storage.put_out(tc)
     self.__exclusive_execution(f)
 

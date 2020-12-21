@@ -1,6 +1,6 @@
 import unittest
 from unittest import mock
-from utils.mysql_util import MysqlUtility
+from privutils.mysql_util import MysqlUtility
 
 mocked_close = mock.Mock()
 mocked_commit = mock.Mock()

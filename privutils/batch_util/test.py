@@ -1,5 +1,5 @@
 import unittest
-from utils.batch_util import BatchUtility
+from privutils.batch_util import BatchUtility
 from datetime import datetime, timedelta
 
 class TestBatchUtility(unittest.TestCase):

@@ -26,6 +26,17 @@ def mocked_requests_post(*args, **kwargs):
 
   return MockResponse(kwargs['json'], int(args[0]))
 
+def mocked_requests_put(*args, **kwargs):
+  class MockResponse:
+    def __init__(self, json_data, status_code):
+      self.text = json_data
+      self.status_code = status_code
+
+    def json(self):
+      return json.loads(self.text)
+
+  return MockResponse(kwargs['params'], int(args[0]))
+
 def mocked_requests_delete(*args, **kwargs):
   class MockResponse:
     def __init__(self, json_data, status_code):
@@ -77,6 +88,22 @@ class TestApiCaller(unittest.TestCase):
       self.tgt.post('200', '{non_json_response')
     with self.assertRaises(Response5xx):
       self.tgt.post('500', '{non_json_response')
+
+  @mock.patch('requests.put', side_effect=mocked_requests_put)
+  def test_delete(self, request_put):
+    response = self.tgt.put('200', '{"k": "v"}')
+    self.assertEqual(response, {"k": "v"})
+
+  @mock.patch('requests.put', side_effect=mocked_requests_put)
+  def test_exception_put(self, request_put):
+    with self.assertRaises(Response4xx):
+      self.tgt.put('400', '{"k": "v"}')
+    with self.assertRaises(Response5xx):
+      self.tgt.put('500', '{"k": "v"}')
+    with self.assertRaises(NonJsonResponse):
+      self.tgt.put('200', '{non_json_response')
+    with self.assertRaises(Response5xx):
+      self.tgt.put('500', '{non_json_response')
 
   @mock.patch('requests.delete', side_effect=mocked_requests_delete)
   def test_delete(self, request_delete):

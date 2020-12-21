@@ -18,7 +18,7 @@ class SelfSchedulingFramework(metaclass=ABCMeta):
     return result
 
   @abstractmethod
-  def __do(self, task):
+  def _do(self, task):
     pass
 
   def put(self, task):
@@ -29,7 +29,7 @@ class SelfSchedulingFramework(metaclass=ABCMeta):
       tc = datetime.now()
       lt = self.task_storage.put_out(tc)
       while lt:
-        map(self.__do, lt)
+        map(self._do, lt)
         lt = self.task_storage.put_out(tc)
     self.__exclusive_execution(f)
 

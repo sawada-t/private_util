@@ -2,7 +2,7 @@
 
 import json
 import requests
-from privutils.api_util.api_exception import *
+from privutils.api_util.api_exception import * 
 
 class ApiCaller(object):
     endpoint = ''
@@ -28,34 +28,41 @@ class ApiCaller(object):
         except json.decoder.JSONDecodeError as e:
             raise NonJsonResponse(response, e.msg)
 
-    def __get_header(self):
-        return {}
-
-    def get(self, path, params):
+    def get(self, path, headers={}, params={}):
         url = f"{self.endpoint}{path}"
         response = requests.get(
             url,
-            headers = self.__get_header(),
+            headers = headers,
             params = params,
         )
         self.__check_status_code(url, response)
         return self.__extract_json(response)
 
-    def post(self, path, params):
+    def post(self, path, headers={}, params={}):
         url = f"{self.endpoint}{path}"
         response = requests.post(
             url,
-            headers = self.__get_header(),
+            headers = headers,
             json = params,
         )
         self.__check_status_code(url, response)
         return self.__extract_json(response)
 
-    def delete(self, path, params):
+    def put(self, path, headers={}, params={}):
+        url = f"{self.endpoint}{path}",
+        response = requests.put(
+            url,
+            headers = headers,
+            params = params,
+        )
+        self.__check_status_code(url, response)
+        return self.__extract_json(response)
+
+    def delete(self, path, headers={}, params={}):
         url = f"{self.endpoint}{path}",
         response = requests.delete(
             url,
-            headers = self.__get_header(),
+            headers = headers,
             params = params,
         )
         self.__check_status_code(url, response)

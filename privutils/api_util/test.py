@@ -59,65 +59,65 @@ class TestApiCaller(unittest.TestCase):
 
   @mock.patch('requests.get', side_effect=mocked_requests_get)
   def test_get(self, request_get):
-    response = self.tgt.get('200', '{"k": "v"}')
+    response = self.tgt.get('200', params='{"k": "v"}')
     self.assertEqual(response, {"k": "v"})
 
   @mock.patch('requests.get', side_effect=mocked_requests_get)
   def test_exception_get(self, request_get):
     with self.assertRaises(Response4xx):
-      self.tgt.get('400', '{"k": "v"}')
+      self.tgt.get('400', params='{"k": "v"}')
     with self.assertRaises(Response5xx):
-      self.tgt.get('500', '{"k": "v"}')
+      self.tgt.get('500', params='{"k": "v"}')
     with self.assertRaises(NonJsonResponse):
-      self.tgt.get('200', '{non_json_response')
+      self.tgt.get('200', params='{non_json_response')
     with self.assertRaises(Response5xx):
-      self.tgt.get('500', '{non_json_response')
+      self.tgt.get('500', params='{non_json_response')
 
   @mock.patch('requests.post', side_effect=mocked_requests_post)
   def test_post(self, request_post):
-    response = self.tgt.post('200', '{"k": "v"}')
+    response = self.tgt.post('200', params='{"k": "v"}')
     self.assertEqual(response, {"k": "v"})
 
   @mock.patch('requests.post', side_effect=mocked_requests_post)
   def test_exception_post(self, request_post):
     with self.assertRaises(Response4xx):
-      self.tgt.post('400', '{"k": "v"}')
+      self.tgt.post('400', params='{"k": "v"}')
     with self.assertRaises(Response5xx):
-      self.tgt.post('500', '{"k": "v"}')
+      self.tgt.post('500', params='{"k": "v"}')
     with self.assertRaises(NonJsonResponse):
-      self.tgt.post('200', '{non_json_response')
+      self.tgt.post('200', params='{non_json_response')
     with self.assertRaises(Response5xx):
-      self.tgt.post('500', '{non_json_response')
+      self.tgt.post('500', params='{non_json_response')
 
   @mock.patch('requests.put', side_effect=mocked_requests_put)
   def test_delete(self, request_put):
-    response = self.tgt.put('200', '{"k": "v"}')
+    response = self.tgt.put('200', params='{"k": "v"}')
     self.assertEqual(response, {"k": "v"})
 
   @mock.patch('requests.put', side_effect=mocked_requests_put)
   def test_exception_put(self, request_put):
     with self.assertRaises(Response4xx):
-      self.tgt.put('400', '{"k": "v"}')
+      self.tgt.put('400', params='{"k": "v"}')
     with self.assertRaises(Response5xx):
-      self.tgt.put('500', '{"k": "v"}')
+      self.tgt.put('500', params='{"k": "v"}')
     with self.assertRaises(NonJsonResponse):
-      self.tgt.put('200', '{non_json_response')
+      self.tgt.put('200', params='{non_json_response')
     with self.assertRaises(Response5xx):
-      self.tgt.put('500', '{non_json_response')
+      self.tgt.put('500', params='{non_json_response')
 
   @mock.patch('requests.delete', side_effect=mocked_requests_delete)
   def test_delete(self, request_delete):
-    response = self.tgt.delete('200', '{"k": "v"}')
+    response = self.tgt.delete('200', params='{"k": "v"}')
     self.assertEqual(response, {"k": "v"})
 
   @mock.patch('requests.delete', side_effect=mocked_requests_delete)
   def test_exception_delete(self, request_delete):
     with self.assertRaises(Response4xx):
-      self.tgt.delete('400', '{"k": "v"}')
+      self.tgt.delete('400', params='{"k": "v"}')
     with self.assertRaises(Response5xx):
-      self.tgt.delete('500', '{"k": "v"}')
+      self.tgt.delete('500', params='{"k": "v"}')
     with self.assertRaises(NonJsonResponse):
-      self.tgt.delete('200', '{non_json_response')
+      self.tgt.delete('200', params='{non_json_response')
     with self.assertRaises(Response5xx):
-      self.tgt.delete('500', '{non_json_response')
+      self.tgt.delete('500', params='{non_json_response')
 

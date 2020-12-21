@@ -1,6 +1,7 @@
 import os
 from abc import ABCMeta, abstractmethod
 import datetime
+import fcntl
 
 class SelfSchedulingFramework(metaclass=ABCMeta):
   task_storage = None
